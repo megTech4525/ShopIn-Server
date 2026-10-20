@@ -4,6 +4,7 @@ type ClientRegister struct {
 	FullName string `json:"full_name" binding:"required"`
 	Email    string `json:"email"     binding:"required,email"`
 	Phone    string `json:"phone"     binding:"required"`
+	Country  string `json:"country" binding:"omitempty iso3166_1_alpha2"`
 	State    string `json:"state" binding:"required"`
 	Address  string `json:"address" binding:"required"`
 	Password string `json:"password"  binding:"required,min=8,max=72"`
@@ -58,6 +59,7 @@ type RiderResponse struct {
 }
 
 type Login struct {
+	Country  string `json:"country" binding:"omitempty, iso3166_1_alpha2"`
 	Phone    string `json:"phone" binding:"required"`
 	Password string `json:"password"   binding:"required"`
 }

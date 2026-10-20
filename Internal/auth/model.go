@@ -11,10 +11,10 @@ const (
 )
 
 type Account struct {
-	ID        string
-	Role      Role
-	Emial     string
-	Phone     string
-	Password  string
-	CreatedAt time.Time
+	ID           string
+	Role         Role
+	Email        string
+	Phone        string
+	PasswordHash string
+	CreatedAt    time.Time
 }
