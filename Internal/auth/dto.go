@@ -4,7 +4,7 @@ type ClientRegister struct {
 	FullName string `json:"full_name" binding:"required"`
 	Email    string `json:"email"     binding:"required,email"`
 	Phone    string `json:"phone"     binding:"required"`
-	Country  string `json:"country" binding:"omitempty iso3166_1_alpha2"`
+	Country  string `json:"country" binding:"omitempty, iso3166_1_alpha2"`
 	State    string `json:"state" binding:"required"`
 	Address  string `json:"address" binding:"required"`
 	Password string `json:"password"  binding:"required,min=8,max=72"`
@@ -25,8 +25,8 @@ type ShopRegister struct {
 	Password     string   `json:"password"      binding:"required,min=8,max=72"`
 	State        string   `json:"state" binding:"required"`
 	Address      string   `json:"address"       binding:"required"`
-	Latitude     *float64 `json:"latitude"`
-	Longitude    *float64 `json:"longitude"`
+	Latitude     *float64 `json:"latitude" binding:"omitempty, iso3166_1_alpha2"`
+	Longitude    *float64 `json:"longitude" binding:"omitempty, iso3166_1_alpha2"`
 }
 
 type ShopResponse struct {
@@ -36,8 +36,8 @@ type ShopResponse struct {
 	Phone        string  `json:"phone"`
 	State        string  `json:"state"`
 	Address      string  `json:"address"`
-	Latitude     float64 `json:"latitude"`
-	Longitude    float64 `json:"longitude"`
+	Latitude     float64 `json:"latitude" binding:"omitempty, iso3166_1_alpha2"`
+	Longitude    float64 `json:"longitude" binding:"omitempty, iso3166_1_alpha2"`
 	IsVerified   bool    `json:"is_verified"`
 }
 
@@ -55,6 +55,7 @@ type RiderResponse struct {
 	Email             string `json:"email"`
 	Phone             string `json:"phone"`
 	RegisteredCompany string `json:"registered_company"`
+	PlateNumber       string `json:"plate_number"`
 	IsVerified        bool   `json:"is_verified"`
 }
 

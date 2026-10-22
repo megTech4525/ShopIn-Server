@@ -31,12 +31,12 @@ func (r *Repository) CreatClient(ctx context.Context, acc Account, p ClientProfi
 	}
 	defer tx.Rollback(ctx)
 	_, err = tx.Exec(ctx,
-		`INSERT INTO account (id, role, email, phone, password_hash, created_at)
-	VALUES ($1, $2, $3, $4, $5, &6)`,
-		acc.ID, string(acc.Role), acc.Email, acc.Phone, acc.PasswordHash, acc.CreatedAt,
+		`INSERT INTO account (id, role, email, phone, password_hash)
+	VALUES ($1, $2, $3, $4, $5)`,
+		acc.ID, string(acc.Role), acc.Email, acc.Phone, acc.PasswordHash,
 	)
 	if err != nil {
-		return MapInsertError(err)
+		return mapInsertError(err)
 	}
 	_, err = tx.Exec(ctx,
 		`INSERT INTO client_profile (account_id, full_name, state, address)
@@ -55,7 +55,7 @@ func (r *Repository) FindByPhone(ctx context.Context, phone string) (*Account, e
 
 	err := r.db.QueryRow(ctx,
 		`SELECT id, role, email, phone, password_hash, created_at
-FROM accounts
+FROM account
 WHERE phone = $1`,
 		phone,
 	).Scan(&acc.ID, &role, &acc.Email, &acc.Phone, &acc.PasswordHash, &acc.CreatedAt)
@@ -69,7 +69,7 @@ WHERE phone = $1`,
 	return &acc, nil
 }
 
-func MapInsertError(err error) error {
+func mapInsertError(err error) error {
 	var pgErr *pgconn.PgError
 	if errors.As(err, &pgErr) && pgErr.Code == "23505" {
 		switch pgErr.ConstraintName {
