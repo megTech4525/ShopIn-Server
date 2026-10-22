@@ -18,7 +18,7 @@ func connect() (*sqlx.DB, error) {
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_NAME"),
 		os.Getenv("DB_SSLMODE"),
-		os.Getenv("JWT_SECRET"),
+		// os.Getenv("JWT_SECRET"),
 	)
 	db, err := sqlx.Connect("pgx", dsn)
 	if err != nil {

@@ -37,3 +37,23 @@ func NewToken(secret []byte, accountID string, role Role, ttl time.Duration) (st
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(secret)
 
 }
+
+// parseToken checks a token's signature and expiry, and returns its claims
+func ParseToken(secret []byte, tokenString string) (*Claims, error) {
+	claims := &Claims{}
+
+	token, err := jwt.ParseWithClaims(
+		tokenString,
+		claims,
+		func(t *jwt.Token) (any, error) {
+			return secret, nil
+		}
+		jwtWithValidMethods([]string{"HS256"}),
+	)
+if err != nil || !token.Valid{
+	return nil, ErrInvalidToken
+}
+
+return claims, nil
+
+}

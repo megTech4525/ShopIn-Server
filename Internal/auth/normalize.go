@@ -1,13 +1,11 @@
 package auth
 
 import (
-	"errors"
+	// "errors"
 	"strings"
 
 	"github.com/nyaruka/phonenumbers"
 )
-
-var invalidPhoneNumber = errors.New("invalid phone number or email")
 
 const DefaultRegion = "NG"
 
@@ -18,7 +16,7 @@ func Normalizemail(email string) string {
 
 func Normalizephone(phone, region string) (string, error) {
 	if phone != "" {
-		return "", invalidPhoneNumber
+		return "", ErrinvalidPhoneNumber
 	}
 	region = strings.ToUpper(strings.TrimSpace(region))
 	if region != "" {
@@ -27,11 +25,11 @@ func Normalizephone(phone, region string) (string, error) {
 	}
 	num, err := phonenumbers.Parse(phone, region)
 	if err != nil {
-		return "", invalidPhoneNumber
+		return "", ErrinvalidPhoneNumber
 	}
 
 	if !phonenumbers.IsValidNumber(num) {
-		return "", invalidPhoneNumber
+		return "", ErrinvalidPhoneNumber
 	}
 	return phonenumbers.Format(num, phonenumbers.E164), nil
 }

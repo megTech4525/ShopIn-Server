@@ -12,4 +12,6 @@ var (
 	ErrInvalidCredentials = errors.New("Invalid phone number of password")
 	ErrPasswordTooShort   = errors.New("Password too short")
 	ErrWeakPassword       = errors.New("Password is weak")
+	ErrinvalidPhoneNumber = errors.New("invalid phone number or email")
+	ErrInvalidToken       = errors.New("invalid Token")
 )

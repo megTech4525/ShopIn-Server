@@ -46,6 +46,7 @@ CREATE TABLE rider_profiles (
     full_name TEXT NOT NULL,
     registered_company TEXT NOT NULL,
     plate_number TEXT,
+    has_ride BOOLEAN NOT NULL DEFAULT false,
     is_verified BOLEAN NOT NUL DEFAULT false,
     is_available BOOLEAN NOT NULL DEFAULT false
 );
