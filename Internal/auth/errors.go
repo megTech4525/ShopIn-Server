@@ -14,4 +14,5 @@ var (
 	ErrWeakPassword       = errors.New("Password is weak")
 	ErrinvalidPhoneNumber = errors.New("invalid phone number or email")
 	ErrInvalidToken       = errors.New("invalid Token")
+	ErrTooManyAttempts    = errors.New("too many login attempts, try again later")
 )
