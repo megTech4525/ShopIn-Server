@@ -46,6 +46,17 @@ func (h *Handler) login(c *gin.Context) {
 	c.JSON(http.StatusAccepted, resp)
 }
 
+func (h *Handler) Me(c *gin.Context) {
+	profile, err := h.svc.Me(c.Request.Context(), AccountIDFrom(c), RoleForm(c))
+	if err != nil {
+		if errors.Is(err, ErrAccountNotFound) {
+			//valid token but the account no longer exists
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "account no longer exists"})
+			return
+		}
+		c.JSON(http.StatusOK, profile)
+	}
+}
 func writeError(c *gin.Context, err error) {
 	switch {
 	case

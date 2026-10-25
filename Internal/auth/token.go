@@ -47,13 +47,13 @@ func ParseToken(secret []byte, tokenString string) (*Claims, error) {
 		claims,
 		func(t *jwt.Token) (any, error) {
 			return secret, nil
-		}
-		jwtWithValidMethods([]string{"HS256"}),
+		},
+		jwt.WithValidMethods([]string{"HS256"}),
 	)
-if err != nil || !token.Valid{
-	return nil, ErrInvalidToken
-}
+	if err != nil || !token.Valid {
+		return nil, ErrInvalidToken
+	}
 
-return claims, nil
+	return claims, nil
 
 }

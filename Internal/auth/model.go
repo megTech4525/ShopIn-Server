@@ -18,3 +18,22 @@ type Account struct {
 	PasswordHash string
 	CreatedAt    time.Time
 }
+type ClientProfile struct {
+	FullName string
+	State    string
+	Address  string
+}
+
+type ShopProfile struct {
+	BusinessName string
+	State        string
+	Address      string
+	Latitude     *float64
+	Longitude    *float64
+}
+
+type RiderProfile struct {
+	FullName          string
+	RegisteredCompany string
+	PlateNumber       *string
+}

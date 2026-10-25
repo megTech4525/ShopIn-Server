@@ -86,3 +86,12 @@ func unauthorized(c *gin.Context, msg string) {
 	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 		"error": msg})
 }
+
+func NoStore() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		h := c.Writer.Header()
+		h.Set("cache-Control", "no-store")
+		h.Set("Pragma", "no-cache")
+		c.Next()
+	}
+}

@@ -1,4 +1,4 @@
-CREATE TABLE account (
+CREATE TABLE accounts (
     id UUID PRIMARY KEY role TEXT NOT NULL CHECK (
         role IN ('client', 'shop', 'rider')
     ),
@@ -10,7 +10,7 @@ CREATE TABLE account (
 
 --Details only clients have
 
-CREATE TABLE client_profile (
+CREATE TABLE client_profiles (
     account_id UUID PRIMARY KEY REFERENCES account (id) ON DELETE CASCADE,
     full_name TEXT NOT NULL,
     state TEXT NOT NULL,

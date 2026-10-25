@@ -203,3 +203,12 @@ func (l *Limiter) Middleware(key KeyFunc) gin.HandlerFunc {
 	}
 
 }
+
+// reset forgets a key, giving it a full bucket again
+// if smeone puts a wrong password and later a right one, i resets the count of the wrong password sequence
+
+func (l *Limiter) Reset(key string) {
+	l.mu.Lock()
+	delete(l.entries, key)
+	l.mu.Unlock()
+}
